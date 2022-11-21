@@ -1,0 +1,53 @@
+while True:
+    try:
+        while True:
+            numbers = list(map(int, input("СПИСОК: Введите числа через пробел: ").split()))
+            dlinna = len(numbers)
+            if dlinna > 2:
+                break
+            print("ВВЕДИТЕ МИНИМУМ ТРИ ЧИСЛА")
+    except ValueError:
+        print("Ошибка ввода: ВВЕДИТЕ ЦЕЛЫЕ ЧИСЛА ЧЕРЕЗ ПРОБЕЛ")
+    else:
+        break
+
+while True:
+    try:
+        while True:
+            element = int(input("Введи любое число: "))
+            if element >= min(numbers):
+                break
+            print("Число вне диапазона СПИСКА")
+    except ValueError:
+        print("Ошибка ввода: ВВЕДИТЕ ЦЕЛОЕ ЧИСЛО")
+    else:
+        break
+
+numbers.append(element)
+print("Преобразование в список: ", numbers)
+
+for i in range(1, len(numbers)):
+    x = numbers[i]
+    idx = i
+    while idx > 0 and numbers[idx-1] > x:
+        numbers[idx] = numbers[idx-1]
+        idx -= 1
+    numbers[idx] = x
+print("Сортировка списка по возрастанию: ", numbers)
+
+
+def binary_search(numbers, element, left, right):
+    if left > right:
+        return False
+    middle = (right + left) // 2
+    if numbers[middle] == element:
+        return middle - 1
+    elif element < numbers[middle]:
+        return binary_search(numbers, element, left, middle - 1)
+    else:
+        return binary_search(numbers, element, middle + 1, right)
+
+
+print(f'Индекс числа меньшего от введенного:', (binary_search(numbers, element, 0, len(numbers))))
+
+# 82 13 59 37 20 41 73 4
